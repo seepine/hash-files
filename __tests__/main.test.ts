@@ -1,25 +1,34 @@
-import {wait} from '../src/wait'
+import {getFiles, readFile} from '../src/files'
+import {hashHex} from '../src/utils'
 import * as process from 'process'
 import * as cp from 'child_process'
 import * as path from 'path'
-import {expect, test} from '@jest/globals'
+import {test} from '@jest/globals'
 
-test('throws invalid number', async () => {
-  const input = parseInt('foo', 10)
-  await expect(wait(input)).rejects.toThrow('milliseconds not a number')
+test('test sha256', async () => {
+  console.log(hashHex('this is content'))
 })
 
-test('wait 500 ms', async () => {
-  const start = new Date()
-  await wait(500)
-  const end = new Date()
-  var delta = Math.abs(end.getTime() - start.getTime())
-  expect(delta).toBeGreaterThan(450)
+test('test sha512', async () => {
+  console.log(hashHex('this is content', 'sha512'))
 })
 
-// shows how the runner will run a javascript action with env / stdout protocol
+test('test readFile', async () => {
+  const content = await readFile('./.prettierignore')
+  console.log(content)
+})
+
+test('test getFiles', async () => {
+  const paths = await getFiles('./', ['**/*.ts', '**/package-lock.json'], {
+    gitignore: true
+  })
+  console.log(paths)
+})
+
 test('test runs', () => {
-  process.env['INPUT_MILLISECONDS'] = '500'
+  process.env['INPUT_WORKDIR'] = './'
+  process.env['INPUT_PATTERNS'] = '**/*.ts\n**/package-lock.json'
+  process.env['INPUT_GITIGNORE'] = 'true'
   const np = process.execPath
   const ip = path.join(__dirname, '..', 'lib', 'main.js')
   const options: cp.ExecFileSyncOptions = {

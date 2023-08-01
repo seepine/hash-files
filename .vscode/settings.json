@@ -1,0 +1,12 @@
+{
+  // 保存时执行eslint
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  // 从不展示扩展缩写
+  "emmet.showExpandedAbbreviation": "never",
+  // 关闭代码区域小地图
+  "editor.minimap.enabled": false,
+  // 代码过长换行
+  "editor.wordWrap": "on"
+}
