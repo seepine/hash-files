@@ -1,0 +1,33 @@
+name: 'hash-files'
+description: 'Compute the SHA256 hash of specified files'
+author: 'seepine'
+inputs:
+  workdir:
+    description: >
+      The working directory for the action.
+    default: ${{ github.workspace }}
+    required: false
+  patterns:
+    description: >
+      The patterns used to match files. You can input multiple patterns seperated by `\n`.
+      We recommand using `|` to concat the patterns in `.yml` files.
+    required: true
+  gitignore:
+    description: >
+      Respect ignore patterns in .gitignore files that apply to the globbed files.
+    default: true
+    required: false
+  ignoreFiles:
+    descruption: >
+      Glob patterns to look for ignore files, which are then used to ignore globbed files.
+      This is a more generic form of the gitignore option, allowing you to find ignore files with a compatible syntax.
+      For instance, this works with Babel's .babelignore, Prettier's .prettierignore, or ESLint's .eslintignore files.
+    required: false
+outputs:
+  hash:
+    description: 'The computed hash result'
+  matched-files:
+    description: 'The files matched by the patterns'
+runs:
+  using: 'node16'
+  main: 'dist/index.js'
