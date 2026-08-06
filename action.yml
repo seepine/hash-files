@@ -33,5 +33,5 @@ outputs:
   matched-files:
     description: 'The files matched by the patterns'
 runs:
-  using: 'node20'
+  using: 'node24'
   main: 'dist/index.js'

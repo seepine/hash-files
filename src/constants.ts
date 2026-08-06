@@ -1,4 +1,3 @@
-/* eslint-disable no-shadow */
 export enum Inputs {
   Workdir = 'workdir', // Input for cache, restore, save action
   Patterns = 'patterns', // Input for cache, restore, save action

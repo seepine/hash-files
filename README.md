@@ -42,8 +42,10 @@ The hash function is based on [nektos/act](https://github.com/nektos/act/blob/ac
 
 ## Example
 ``` yml
-# Setup the Node environment. This step can be skipped if Node has been installed.
-- uses: actions/setup-node@v3
+# Setup the Node 24 environment. This step can be skipped if Node 24 has been installed.
+- uses: actions/setup-node@v7
+  with:
+    node-version: 24.x
 
 - uses: seepine/hash-files@v1
   id: get-hash
